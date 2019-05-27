@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.teren4m.adapter.delegate.CompositeDelegateAdapter
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         val list = findViewById<RecyclerView>(R.id.list)
         val buttonAdd = findViewById<View>(R.id.button_add)
 
-        val items = mutableListOf<UuidItem>()
+        val items = mutableListOf<StringItem>()
+        var counter = 0
 
         val adapter = CompositeDelegateAdapter.Builder()
             .add(TestAdapter())
@@ -27,11 +27,13 @@ class MainActivity : AppCompatActivity() {
         list.adapter = adapter
 
         buttonAdd.setOnClickListener {
-            UUID.randomUUID().toString()
-                .let(::UuidItem)
+
+            counter.toString()
+                .let(::StringItem)
                 .let(items::add)
 
             adapter.update(items)
+            counter++
         }
     }
 }

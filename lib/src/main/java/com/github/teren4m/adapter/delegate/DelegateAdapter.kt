@@ -2,13 +2,12 @@ package com.github.teren4m.adapter.delegate
 
 import android.view.View
 import androidx.annotation.LayoutRes
+import kotlinx.android.extensions.LayoutContainer
 
 abstract class DelegateAdapter<T> {
 
     @get:LayoutRes
     abstract val layoutId: Int
-
-    open fun onCreated(view: View) = Unit
 
     abstract fun onBind(position: Int, item: T, viewHolder: KViewHolder)
 
@@ -19,16 +18,13 @@ abstract class DelegateAdapter<T> {
     abstract fun isForViewType(items: List<Any>, position: Int): Boolean
 
     fun createViewHolder(parent: View): KViewHolder =
-        KViewHolder(parent, ::onCreated)
+        KViewHolder(parent)
 
-    class KViewHolder(val containerView: View, onCreated: (View) -> Unit) : BaseViewHolder(containerView) {
+    class KViewHolder(
+        view: View
+    ) : BaseViewHolder(view), LayoutContainer {
 
-        init {
-            onCreated(containerView)
-        }
+        override val containerView = view
 
-        fun layout(block: View.() -> Unit) {
-            containerView.block()
-        }
     }
 }

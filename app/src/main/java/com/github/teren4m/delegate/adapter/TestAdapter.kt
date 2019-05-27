@@ -1,22 +1,18 @@
 package com.github.teren4m.delegate.adapter
 
-import android.view.View
-import android.widget.TextView
+import android.util.Log
 import com.github.teren4m.adapter.delegate.DelegateAdapter
+import kotlinx.android.synthetic.main.item_test.*
 
-class TestAdapter : DelegateAdapter<UuidItem>() {
+class TestAdapter : DelegateAdapter<StringItem>() {
 
     override val layoutId = R.layout.item_test
 
-    private lateinit var viewText: TextView
-
-    override fun onCreated(view: View) {
-        viewText = view.findViewById(R.id.text)
+    override fun onBind(position: Int, item: StringItem, viewHolder: KViewHolder) {
+        Log.i("TestAdapter", item.str)
+        viewHolder.view_text.text = item.str
     }
 
-    override fun onBind(position: Int, item: UuidItem, viewHolder: KViewHolder) {
-        viewText.text = item.uuid
-    }
+    override fun isForViewType(items: List<Any>, position: Int) = items[position] is StringItem
 
-    override fun isForViewType(items: List<Any>, position: Int) = items[position] is UuidItem
 }

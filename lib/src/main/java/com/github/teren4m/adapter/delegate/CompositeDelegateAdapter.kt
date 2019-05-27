@@ -28,7 +28,7 @@ class CompositeDelegateAdapter(
         adapters[viewType].let {
             val inflatedView = LayoutInflater.from(parent.context)
                 .inflate(it.layoutId, parent, false)
-            val holder = DelegateAdapter.KViewHolder(inflatedView, it::onCreated)
+            val holder = DelegateAdapter.KViewHolder(inflatedView)
             holder.setListener { position, item, _ ->
                 it.onBindItem(position, item, holder)
             }
