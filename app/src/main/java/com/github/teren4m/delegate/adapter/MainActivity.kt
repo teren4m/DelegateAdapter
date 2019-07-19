@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         var counter = 0
 
         val adapter = CompositeDelegateAdapter.Builder()
-            .add(TestAdapter())
+            .add(TestAdapter(this))
             .build()
 
         list.layoutManager = LinearLayoutManager(this)
@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 .let(items::add)
 
             adapter.update(items)
+
             counter++
         }
     }

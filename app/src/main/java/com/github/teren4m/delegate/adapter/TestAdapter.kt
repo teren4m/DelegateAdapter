@@ -1,10 +1,11 @@
 package com.github.teren4m.delegate.adapter
 
+import android.content.Context
 import android.util.Log
 import com.github.teren4m.adapter.delegate.DelegateAdapter
 import kotlinx.android.synthetic.main.item_test.*
 
-class TestAdapter : DelegateAdapter<StringItem>() {
+class TestAdapter(context: Context) : DelegateAdapter<StringItem>(context) {
 
     override val layoutId = R.layout.item_test
 
@@ -13,6 +14,7 @@ class TestAdapter : DelegateAdapter<StringItem>() {
         viewHolder.view_text.text = item.str
     }
 
-    override fun isForViewType(items: List<Any>, position: Int) = items[position] is StringItem
+    override fun isForViewType(items: List<Any>, position: Int) =
+        items[position] is StringItem
 
 }
